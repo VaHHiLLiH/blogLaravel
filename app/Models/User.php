@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'token_to_registration',
+        'token_to_restore_pass',
     ];
 
     /**
@@ -41,4 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return array<Record> Все посты этого пользователя
+     */
+    public function record()
+    {
+        return $this->hasMany(Record::class, 'author_id');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'author_id');
+    }
 }

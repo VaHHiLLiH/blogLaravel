@@ -1,5 +1,6 @@
 <?php
 
+use \App\Http\Controllers\Generate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('generate/')->group( function () {
+    Route::get('record/{count}', [Generate::class, 'generateRecord'])->name('generateRecords');
+
+    Route::get('comment/{count}', [Generate::class, 'generateComment'])->name('generateComments');
+
+    Route::get('user/{count}', [Generate::class, 'generateUser'])->name('generateUsers');
 });
