@@ -18,12 +18,9 @@ class CreateRecordsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('image');
-<<<<<<< HEAD
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-=======
             $table->integer('author_id');
->>>>>>> origin/master
             $table->timestamps();
         });
     }
