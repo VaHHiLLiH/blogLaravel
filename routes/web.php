@@ -1,6 +1,7 @@
 <?php
 
 use \App\Http\Controllers\Generate;
+use \App\Http\Controllers\UserPanel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('start');
+
+Route::get('test', [UserPanel::class, 'test'])->name('testing');
 
 Route::prefix('generate/')->group( function () {
     Route::get('record/{count}', [Generate::class, 'generateRecord'])->name('generateRecords');
@@ -25,3 +28,16 @@ Route::prefix('generate/')->group( function () {
 
     Route::get('user/{count}', [Generate::class, 'generateUser'])->name('generateUsers');
 });
+
+//Добавить middleware чтобы проверить залогинен юзверь или нет
+Route::get('registration', function () {
+    return view('authorization');
+})->name('registration');
+
+Route::post('registration', [UserPanel::class, 'regUser'])->name('regUser');
+
+Route::get('authorization', function () {
+    return view('authorization');
+})->name('authorization');
+
+Route::post('authorization', [UserPanel::class, 'authUser'])->name('authUser');

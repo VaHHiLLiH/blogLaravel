@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class RecordFactory extends Factory
 {
@@ -13,11 +14,14 @@ class RecordFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->name();
+
         return [
-            'name'          => $this->faker->name(),
+            'name'          => $name,
+            'slug'          => Str::slug($name),
             'description'   => $this->faker->text(),
             'image'         => $this->faker->image(width: 200, height: 200),
-            'author_id' => null,
+            'author_id'     => null,
         ];
     }
 }

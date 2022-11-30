@@ -16,6 +16,10 @@ class Record extends Model
         'author_id',
     ];
 
+    protected $guarded = [
+        'slug',
+    ];
+
     /**
      * @User автор этой записи
      */
