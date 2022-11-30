@@ -17,7 +17,12 @@ class Generate extends Controller
 
     public function generateComment(int $count)
     {
-        $comment = Comment::factory()->count($count)->for(User::factory()->create())->for(Record::factory()->create())->create();
+        $user = User::factory()->create();
+        $comment = Comment::factory()->count($count)->for(Record::factory()->create([
+            'author_id' => $user->id,
+        ]))->create([
+            'author_id' => $user->id,
+        ]);
         dd($comment);
     }
 

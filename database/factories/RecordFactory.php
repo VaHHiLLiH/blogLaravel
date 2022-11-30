@@ -17,6 +17,7 @@ class RecordFactory extends Factory
             'name'          => $this->faker->name(),
             'description'   => $this->faker->text(),
             'image'         => $this->faker->image(width: 200, height: 200),
+            'author_id' => null,
         ];
     }
 }

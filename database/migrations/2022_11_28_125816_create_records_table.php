@@ -20,7 +20,6 @@ class CreateRecordsTable extends Migration
             $table->string('image');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('author_id');
             $table->timestamps();
         });
     }

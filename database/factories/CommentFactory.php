@@ -14,6 +14,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
+            'author_id' => null,
             'content'   => $this->faker->text(45),
         ];
     }

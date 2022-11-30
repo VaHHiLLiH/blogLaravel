@@ -15,13 +15,13 @@ class Comment extends Model
         'content',
     ];
 
-    public function author()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function post()
+    public function record()
     {
-        return $this->belongsTo(Record::class);
+        return $this->belongsTo(Record::class, 'record_id');
     }
 }
