@@ -29,8 +29,7 @@ class SendToken extends Mailable
     public function build()
     {
         return $this->view('letters.registrationToken')->with([
-            'name'  => $this->user->name,
-            'email' => $this->user->email,
+            'user'  => $this->user,
             'token' => $this->token,
         ]);
     }

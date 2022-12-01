@@ -10,7 +10,7 @@ class GenerateToken
     {
         $token = '';
 
-        while(!GenerateToken::checkUniqRegToken($token) && $token != '') {
+        while(!GenerateToken::checkUniqRegToken($token) || $token == '') {
             $token = bin2hex(random_bytes(10));
         }
 

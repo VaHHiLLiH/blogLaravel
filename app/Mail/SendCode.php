@@ -29,6 +29,9 @@ class SendCode extends Mailable
      */
     public function build()
     {
-        return $this->markdown('letters.sendCode');
+        return $this->markdown('letters.sendCode', [
+            'user'  => $this->user,
+            'token' => $this->token,
+        ]);
     }
 }

@@ -41,3 +41,7 @@ Route::get('authorization', function () {
 })->name('authorization');
 
 Route::post('authorization', [UserPanel::class, 'authUser'])->name('authUser');
+
+Route::get('confirmRegistration/{token}', [UserPanel::class, 'confirmUser'])->name('confirmUser');
+
+Route::get('cabinet', [UserPanel::class, 'showUserPage'])->name('homePage');
