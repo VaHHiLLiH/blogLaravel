@@ -28,11 +28,21 @@ class GenerateToken
 
     public static function generateConfirmPassToken()
     {
+        $token = '';
 
+        while(!GenerateToken::checkUniqAuthToken($token) || $token == '') {
+            $token = mt_rand(100000, 999999);
+        }
+
+        return $token;
     }
 
     public static function checkUniqAuthToken($token)
     {
-
+        if (!empty(User::where('token_to_restore_pass', $token)->first())) {
+            return false;
+        } else {
+            return $token;
+        }
     }
 }

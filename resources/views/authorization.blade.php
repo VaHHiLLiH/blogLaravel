@@ -33,6 +33,14 @@
 
                     <button type="submit">Authorization</button>
                 </form>
+            <h1>Forgot Password</h1>
+            <form method="POST" action="{{ route('forgotPass') }}">
+                @csrf
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text">
+
+                <button type="submit">Restore Password</button>
+            </form>
         </div>
     </body>
 </html>

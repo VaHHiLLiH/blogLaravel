@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\RestorePassword;
 use App\Jobs\SendLetter;
 use App\Mail\SendToken;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Services\GenerateToken;
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -72,5 +74,42 @@ class UserPanel extends Controller
         $user = Auth::user();
 
         return view('personalPage.cabinet', ['user' => $user]);
+    }
+
+    public function forgotPass(Request $request)
+    {
+        $user = User::where('email', $request->get('email'))->first();
+
+        if(empty($user)) {
+            return back()->withErrors([
+                'email' => 'Введенные вами данные не корректны',
+            ]);
+        }
+        $token = GenerateToken::generateConfirmPassToken();
+
+        $user->update(['token_to_restore_pass'  => $token]);
+
+        RestorePassword::dispatch($user, $token);
+
+        return view('inputCode');
+    }
+
+    public function setPass(Request $request)
+    {
+        $user = User::where('token_to_restore_pass', $request->get('code'))->first();
+
+        if(empty($user)) {
+            return back()->withErrors([
+                'code' => 'Хуйня твой код, сыночек',
+            ]);
+        }
+
+        $user->update(['password' => $request->get('password'), 'token_to_restore_pass' => null]);
+
+        Auth::login($user);
+
+        $request->session()->regenerate();
+
+        return redirect()->route('homePage');
     }
 }

@@ -45,3 +45,7 @@ Route::post('authorization', [UserPanel::class, 'authUser'])->name('authUser');
 Route::get('confirmRegistration/{token}', [UserPanel::class, 'confirmUser'])->name('confirmUser');
 
 Route::get('cabinet', [UserPanel::class, 'showUserPage'])->name('homePage');
+
+Route::post('forgotPassword', [UserPanel::class, 'forgotPass'])->name('forgotPass');
+
+Route::post('setNewPass', [UserPanel::class, 'setPass'])->name('checkCode');
