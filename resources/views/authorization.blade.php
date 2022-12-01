@@ -8,7 +8,6 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('registration'))
                 <h1>Registration</h1>
                 <form method="POST" action="{{ route('regUser') }}">
                     @csrf
@@ -23,7 +22,6 @@
 
                     <button type="submit">Registration</button>
                 </form>
-            @elseif (Route::has('authorization'))
                 <h1>Authorization</h1>
                 <form method="POST" action="{{ route('authUser') }}">
                     @csrf
@@ -35,7 +33,6 @@
 
                     <button type="submit">Authorization</button>
                 </form>
-            @endif
         </div>
     </body>
 </html>

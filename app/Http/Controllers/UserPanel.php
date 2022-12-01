@@ -53,7 +53,18 @@ class UserPanel extends Controller
 
     public function authUser(Request $request)
     {
-        dd($request->exists('_token'));
+        if (Auth::attempt([
+            'email'     => $request->get('email'),
+            'password'  => $request->get('password'),
+        ])) {
+            $request->session()->regenerate();
+
+            return redirect()->route('homePage');
+        } else {
+            return back()->withErrors([
+                'email' => 'Введенные вами данные не корректны',
+            ]);
+        }
     }
 
     public function showUserPage()
