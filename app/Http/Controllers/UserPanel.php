@@ -21,6 +21,13 @@ class UserPanel extends Controller
     public function test()
     {
 
+        $record = Record::create([
+            'name'                  => 'nazVANI e',
+            'description'           => '',
+            'image'                 => '',
+            'author_id'             => 1
+        ]);
+        dd($record);
         /*$user = User::find(5);
 
         dd($user->record, $user->comment);*/

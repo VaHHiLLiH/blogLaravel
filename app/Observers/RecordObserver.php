@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Record;
+use Illuminate\Support\Str;
 
 class RecordObserver
 {
@@ -14,7 +15,7 @@ class RecordObserver
      */
     public function created(Record $record)
     {
-        $record->slug = str_slug($record->name);
+        $record->slug = Str::slug($record->name, 'ru');
     }
 
     /**
