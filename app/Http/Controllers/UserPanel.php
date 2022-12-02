@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Jobs\RestorePassword;
 use App\Jobs\SendLetter;
 use App\Mail\SendToken;
+use App\Models\Comment;
+use App\Models\Record;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,12 +21,21 @@ class UserPanel extends Controller
     public function test()
     {
 
+        /*$user = User::find(5);
+
+        dd($user->record, $user->comment);*/
+
+        /*$record = Record::find(6);
+
+        dd($record->user, $record->comment);*/
+
+        /*$comment = Comment::first();
+
+        dd($comment->user, $comment->record);*/
     }
 
     public function confirmUser(string $token, Request $request)
     {
-        //dd($token);
-
         $user = User::where('token_to_registration', $token)->first();
 
         if (!empty($user)) {
