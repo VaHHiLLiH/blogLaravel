@@ -32,7 +32,7 @@ Route::prefix('generate/')->group( function () {
 //Добавить middleware чтобы проверить залогинен юзверь или нет
 Route::get('registration', function () {
     return view('authorization');
-})->name('registration');
+})->name('registration')->middleware('is.logged');
 
 Route::post('registration', [UserPanel::class, 'regUser'])->name('regUser');
 
