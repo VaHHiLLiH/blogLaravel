@@ -15,7 +15,9 @@ class RecordObserver
      */
     public function created(Record $record)
     {
-        $record->slug = Str::slug($record->name, 'ru');
+        $record->slug = Str::slug($record->name, '-', 'ru');
+
+        $record->save();
     }
 
     /**

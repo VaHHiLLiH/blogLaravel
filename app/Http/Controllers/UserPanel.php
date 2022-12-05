@@ -13,21 +13,21 @@ use Illuminate\Http\Request;
 use App\Http\Services\GenerateToken;
 use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UserPanel extends Controller
 {
+    public function index(Request $request)
+    {
+        $records = DB::table('records')->take(5)->get();
+
+        return view('welcome', compact('records'));
+    }
+
     public function test()
     {
-
-        $record = Record::create([
-            'name'                  => 'nazVANI e',
-            'description'           => '',
-            'image'                 => '',
-            'author_id'             => 1
-        ]);
-        dd($record);
         /*$user = User::find(5);
 
         dd($user->record, $user->comment);*/
@@ -129,5 +129,17 @@ class UserPanel extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('homePage');
+    }
+
+    public function createRecord(Request $request)
+    {
+        $record = Record::create([
+            'name'          => $request->get('name'),
+            'description'   => $request->get('description'),
+            'author_id'     => Auth::user()->getAuthIdentifier(),
+        ]);
+
+        dd($record);
+
     }
 }

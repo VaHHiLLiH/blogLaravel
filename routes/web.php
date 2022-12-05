@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('start');
+Route::get('/', [UserPanel::class, 'index'])->name('start');
 
 Route::get('test', [UserPanel::class, 'test'])->name('testing');
 
@@ -49,3 +47,5 @@ Route::get('cabinet', [UserPanel::class, 'showUserPage'])->name('homePage');
 Route::post('forgotPassword', [UserPanel::class, 'forgotPass'])->name('forgotPass');
 
 Route::post('setNewPass', [UserPanel::class, 'setPass'])->name('checkCode');
+
+Route::post('creatingRecord', [UserPanel::class, 'createRecord'])->name('createRecord');

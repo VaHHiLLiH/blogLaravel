@@ -11,5 +11,19 @@
     <p>{{ $user->email }}</p>
     <p>{{ $user->password }}</p>
 </div>
+
+<div class="record-from">
+    <form method="POST" action="{{ route('createRecord') }}">
+        @csrf
+        <label for="name">Record title</label>
+        <input id="name" name="name" type="text">
+
+
+        <label for="description">Description</label>
+        <input id="description" name="description" type="text">
+
+        <button type="submit">Post your record</button>
+    </form>
+</div>
 </body>
 </html>
