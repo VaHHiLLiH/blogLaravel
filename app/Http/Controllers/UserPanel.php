@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Record;
 use App\Models\User;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
 use App\Http\Services\GenerateToken;
 use Illuminate\Queue\Jobs\Job;
@@ -21,13 +22,20 @@ class UserPanel extends Controller
 {
     public function index(Request $request)
     {
-        $records = DB::table('records')->take(5)->get();
+        /*$records = DB::table('records')->take(10)->get();*/
 
-        return view('welcome', compact('records'));
+        return view('welcome'/*, compact('records')*/);
     }
 
-    public function test()
+    public function test(Request $request)
     {
+
+        $url = file_get_contents('https://mirpozitiva.ru/wp-content/uploads/2019/11/1472042719_15.jpg');
+
+        $hachImg = base64_encode($url);
+
+        echo '<img src="https://mirpozitiva.ru/wp-content/uploads/2019/11/1472042719_15.jpg">';
+        //dd($request->cookie());
         /*$user = User::find(5);
 
         dd($user->record, $user->comment);*/
@@ -76,7 +84,7 @@ class UserPanel extends Controller
         if (Auth::attempt([
             'email'     => $request->get('email'),
             'password'  => $request->get('password'),
-        ])) {
+        ], true)) {
             $request->session()->regenerate();
 
             return redirect()->route('homePage');
@@ -140,6 +148,21 @@ class UserPanel extends Controller
         ]);
 
         dd($record);
+
+    }
+
+    /*-----------------API----------------*/
+    public function DownloadImage(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+
+        $file_name = md5(microtime());
+        $request->file->move(config('image_uploader.img_path'), $file_name.'.'.$request->file->getClientOriginalExtension());
+
+        $user->update([
+            'avatar'    => !empty($request->file) ? 'image/'.$file_name.'.'.$request->file->getClientOriginalExtension() : $user->avatar,
+            'name'      => !empty($request->name) ? $request->name : $user->name,
+        ]);
 
     }
 }

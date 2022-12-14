@@ -37,7 +37,8 @@
 .personal-page .container .info img {
   width: 150px;
   height: 150px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 150px;
 }
 
@@ -58,4 +59,3 @@
   border-radius: 6px;
 }
 
-/*# sourceMappingURL=app.css.map */

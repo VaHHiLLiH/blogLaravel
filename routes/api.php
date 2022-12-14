@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\UserPanel;
+use App\Http\Repositories\RecordRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('test', function () {
+    echo '1';
+});
+
+Route::post('updateUser', [UserPanel::class, 'DownloadImage']);
+
+Route::post('getRecords', [RecordRepository::class, 'getPeaceRecords']);
+
+Route::post('getCountRecords', [RecordRepository::class, 'getAllRecords']);

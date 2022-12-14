@@ -1,0 +1,75 @@
+.personal-page{
+    display: flex;
+    width: 90%;
+    margin: auto;
+
+
+    .left-panel {
+        background-color: aliceblue;
+        padding: 60px 20px;
+        border-radius: 12px;
+        width: 15%;
+
+        .panel-component {
+            font-size: 24px;
+            //border: 1px solid black;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+
+            &:hover{
+                background-color: floralwhite;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .container{
+        width: 85%;
+
+        .info{
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            margin: auto;
+            font-size: 24px;
+
+            input{
+                margin: 5px;
+                min-height: 20px;
+                font-size: 20px;
+            }
+
+            img{
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 150px;
+            }
+        }
+    }
+}
+
+#post-container {
+    .records-list {
+
+        .record-item {
+            border: 2px solid green;
+            padding: 20px;
+            background: whitesmoke;
+            width: 40%;
+            margin: auto;
+            margin-bottom: 40px;
+        }
+    }
+    button{
+        margin: auto;
+        margin-bottom: 20px;
+        display: block;
+        width: 150px;
+        height: 25px;
+        border-radius: 6px;
+    }
+}
+
+

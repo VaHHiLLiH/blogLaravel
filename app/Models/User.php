@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
         'token_to_registration',
         'token_to_restore_pass',
     ];
@@ -55,5 +56,10 @@ class User extends Authenticatable
     public function comment()
     {
         return $this->hasMany(Comment::class, 'author_id');
+    }
+
+    public function records()
+    {
+        return $this->belongsToMany(Record::class, 'likes', 'user_id', 'record_id');
     }
 }

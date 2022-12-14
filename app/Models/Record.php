@@ -14,6 +14,8 @@ class Record extends Model
         'description',
         'image',
         'author_id',
+        'like',
+        'looked',
     ];
 
     protected $guarded = [
@@ -31,5 +33,10 @@ class Record extends Model
     public function comment()
     {
         return $this->hasMany(Comment::class, 'record_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'record_id', 'user_id');
     }
 }

@@ -19,9 +19,11 @@ class RecordFactory extends Factory
         return [
             'name'          => $name,
             'slug'          => Str::slug($name),
-            'description'   => $this->faker->text(),
-            'image'         => $this->faker->image(width: 200, height: 200),
+            'description'   => $this->faker->text(4600),
+            'image'         => $this->faker->imageUrl(width: 200, height: 200),
             'author_id'     => null,
+            'like'          => 0,
+            'looked'        => 0,
         ];
     }
 }

@@ -3,13 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="{{ mix('/js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <title>Registration</title>
 </head>
 <body class="antialiased">
-<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-    <p>{{ $user->email }}</p>
-    <p>{{ $user->password }}</p>
+<div class="wapka">
+    шапка-хуяпка
+</div>
+<div id="app">
+    <!--<test></test>-->
+    @auth
+    <cabinet :user="{{ json_encode($user) }}"></cabinet>
+    @endauth
+</div>
+<!--<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+    @auth
+        <p>{{ $user->email }}</p>
+        <p>{{ $user->password }}</p>
+    @endauth
 </div>
 
 <div class="record-from">
@@ -24,6 +36,6 @@
 
         <button type="submit">Post your record</button>
     </form>
-</div>
+</div>-->
 </body>
 </html>

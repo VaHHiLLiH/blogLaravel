@@ -20,6 +20,8 @@ class CreateRecordsTable extends Migration
             $table->text('description');
             $table->string('image')->nullable();
             $table->unsignedBigInteger('author_id');
+            $table->integer('like')->default(0);
+            $table->integer('looked')->default(0);
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
